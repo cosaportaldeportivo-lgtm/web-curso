@@ -756,40 +756,20 @@
         aplicarPreciosInternacionales();
 
         // =============================================
-        // LÓGICA PARA OBTENER SEGUIDORES DE REDES
-        // =============================================
-        async function obtenerSeguidores() {
-            try {
-                const instagramRes = await fetch('http://localhost:3000/api/instagram/ignaciotorchi');
-                if (instagramRes.ok) {
-                    const instagramData = await instagramRes.json();
-                    const elementoInsta = document.getElementById('insta-followers');
-                    if (elementoInsta && instagramData.followers) {
-                        elementoInsta.innerText = instagramData.followers;
-                    }
-                } else {
-                    document.getElementById('insta-followers').innerText = 'Error API';
-                }
-
-                const tiktokRes = await fetch('http://localhost:3000/api/tiktok/ignaciotorchi');
-                if (tiktokRes.ok) {
-                    const tiktokData = await tiktokRes.json();
-                    const elementoTikTok = document.getElementById('tiktok-followers');
-                    if (elementoTikTok && tiktokData.followers) {
-                        elementoTikTok.innerText = tiktokData.followers;
-                    }
-                } else {
-                    document.getElementById('tiktok-followers').innerText = 'Error API';
-                }
-            } catch (error) {
-                console.error("Error al conectar con el servidor:", error);
-                document.getElementById('insta-followers').innerText = 'Error conexión';
-                document.getElementById('tiktok-followers').innerText = 'Error conexión';
-            }
-        }
-        
-        obtenerSeguidores();
-        setInterval(obtenerSeguidores, 300000);
+// LÓGICA PARA SEGUIDORES (SOLO INTENTA EN PRODUCCIÓN)
+// =============================================
+async function obtenerSeguidores() {
+    try {
+        // Si no hay backend, mostramos "No disponible" automáticamente
+        // NO se hace fetch a localhost para evitar el aviso de Windows
+        document.getElementById('insta-followers').innerText = 'Disponible pronto';
+        document.getElementById('tiktok-followers').innerText = 'Disponible pronto';
+    } catch (error) {
+        console.error("Error al conectar con el servidor:", error);
+        document.getElementById('insta-followers').innerText = 'No disponible';
+        document.getElementById('tiktok-followers').innerText = 'No disponible';
+    }
+}
     </script>
 </body>
 </html>
