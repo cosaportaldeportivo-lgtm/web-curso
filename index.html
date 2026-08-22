@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ignacio Torchi | Cursos de Diseño Deportivo y Photoshop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0a0a0a',
+                            card: '#121212',
+                            border: '#2a2a2a',
+                            accent: '#4f46e5',
+                            accentDark: '#3730a3',
+                            glow: 'rgba(79, 70, 229, 0.4)',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+                        'marquee': 'marquee 80s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { opacity: 1, transform: 'scale(1)' },
+                            '50%': { opacity: 0.8, transform: 'scale(1.05)' },
+                        },
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        .glass-nav {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -12px rgba(79, 70, 229, 0.3);
+            border-color: rgba(79, 70, 229, 0.4);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 80%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .text-gradient-accent {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glow-button {
+            position: relative;
+            overflow: hidden;
+        }
+        .glow-button::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #4f46e5, #7c3aed, #4f46e5);
+            border-radius: 9999px;
+            z-index: -1;
+            animation: border-glow 3s linear infinite;
+            background-size: 300% 300%;
+        }
+        @keyframes border-glow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .blob-bg {
+            filter: blur(80px);
+            opacity: 0.3;
+        }
+
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+    </style>
+</head>
+<body class="antialiased font-sans bg-brand-dark selection:bg-brand-accent selection:text-white">
+
+    <!-- Background blobs -->
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-brand-accent/30 rounded-full mix-blend-screen blob-bg animate-blob"></div>
+        <div class="absolute top-[30%] right-[-10%] w-96 h-96 bg-purple-500/30 rounded-full mix-blend-screen blob-bg animate-blob animation-delay-2000"></div>
+        <div class="absolute bottom-[-20%] left-[30%] w-96 h-96 bg-blue-500/30 rounded-full mix-blend-screen blob-bg animate-blob animation-delay-4000"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <a href="#" class="flex items-center transition-transform hover:scale-105">
+                        <img src="img/logo-ignacio-torchi.svg" alt="Ignacio Torchi Logo" class="h-10 w-auto">
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#cursos" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Cursos</a>
+                    <a href="#testimonios" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Testimonios</a>
+                    <a href="#cursos" class="bg-white text-black hover:bg-gray-100 px-6 py-2.5 rounded-full text-sm font-bold transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]">
+                        Empezar ahora
+                    </a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button type="button" class="text-gray-400 hover:text-white focus:outline-none" aria-controls="mobile-menu" aria-expanded="false" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div class="md:hidden hidden bg-brand-dark/95 backdrop-blur-md border-b border-brand-border" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#cursos" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Cursos</a>
+                <a href="#testimonios" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Testimonios</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="relative z-10 pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="text-center max-w-4xl mx-auto">
+                
+                <!-- Badge con urgencia -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-red-500/30 bg-red-500/10 backdrop-blur-sm mb-8 animate-pulse-glow">
+                    <span class="flex h-2 w-2 rounded-full bg-red-500 animate-pulse"></span>
+                    <span class="text-xs font-semibold text-red-400 uppercase tracking-wider">Oferta por tiempo limitado</span>
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1] break-words">
+                    DISEÑA COMO UN <br/>
+                    <span class="text-gradient">PRO Y CONSIGUE</span>
+                    <br/>
+                    <span class="text-gradient">CLIENTES DE ÉLITE</span>
+                </h1>
+                
+                <p class="mt-4 text-xl md:text-2xl text-gray-400 mb-8 max-w-2xl mx-auto font-light leading-relaxed">
+                    Aprende el flujo de trabajo real de un diseñador deportivo. Photoshop, Illustrator e IA aplicados a flyers que venden y te posicionan.
+                </p>
+
+                <!-- Contador regresivo de 14 minutos -->
+                <div class="bg-brand-card/80 backdrop-blur-sm border border-brand-border rounded-2xl p-4 inline-block mb-8 mx-auto">
+                    <div class="flex items-center gap-6 justify-center">
+                        <div class="text-center">
+                            <span class="block text-2xl font-bold text-white" id="hours">00</span>
+                            <span class="text-[10px] text-gray-400 uppercase tracking-widest">Horas</span>
+                        </div>
+                        <span class="text-2xl font-bold text-brand-accent">:</span>
+                        <div class="text-center">
+                            <span class="block text-2xl font-bold text-white" id="minutes">14</span>
+                            <span class="text-[10px] text-gray-400 uppercase tracking-widest">Minutos</span>
+                        </div>
+                        <span class="text-2xl font-bold text-brand-accent">:</span>
+                        <div class="text-center">
+                            <span class="block text-2xl font-bold text-white" id="seconds">00</span>
+                            <span class="text-[10px] text-gray-400 uppercase tracking-widest">Segundos</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <a href="#cursos" class="glow-button relative inline-flex justify-center items-center px-10 py-4 text-base font-bold rounded-full text-white bg-brand-accent hover:bg-indigo-600 transition-all shadow-[0_0_30px_rgba(79,70,229,0.3)] hover:shadow-[0_0_50px_rgba(79,70,229,0.5)]">
+                        <span class="relative z-10">🔥 ACCEDE AHORA Y EMPIEZA A COBRAR</span>
+                    </a>
+                </div>
+                
+                <!-- Trust badges -->
+                <div class="mt-8 flex flex-wrap justify-center gap-6 text-xs text-gray-500">
+                    <span class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Acceso de por vida</span>
+                    <span class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> 500+ alumnos</span>
+                    <span class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Pago seguro</span>
+                </div>
+            </div>
+
+            <!-- Carrusel de flyers -->
+            <div class="mt-16 relative mx-auto max-w-5xl animate-float">
+                <div class="rounded-xl bg-brand-border p-1 md:p-2 shadow-2xl shadow-brand-accent/10">
+                    <div class="rounded-lg overflow-hidden bg-brand-card relative aspect-[16/9] border border-gray-800 flex items-center">
+                        <div class="flex h-full w-max animate-marquee">
+                            <!-- GRUPO 1 -->
+                            <div class="flex h-full w-max gap-2 p-2">
+                                <img src="img/1.png" alt="Flyer 1" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/2.jpg" alt="Flyer 2" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/3.jpg" alt="Flyer 3" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/4.jpg" alt="Flyer 4" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/5.png" alt="Flyer 5" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/6.jpg" alt="Flyer 6" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/7.png" alt="Flyer 7" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/8.png" alt="Flyer 8" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/9.png" alt="Flyer 9" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/10.jpg" alt="Flyer 10" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/11.jpg" alt="Flyer 11" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/12.png" alt="Flyer 12" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/13.png" alt="Flyer 13" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/14.jpg" alt="Flyer 14" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/15.jpg" alt="Flyer 15" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/16.jpg" alt="Flyer 16" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/17.jpg" alt="Flyer 17" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/18.jpg" alt="Flyer 18" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/19.jpg" alt="Flyer 19" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/20.png" alt="Flyer 20" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/21.jpg" alt="Flyer 21" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/22.jpg" alt="Flyer 22" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/23.jpg" alt="Flyer 23" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/24.png" alt="Flyer 24" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/25.png" alt="Flyer 25" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/26.png" alt="Flyer 26" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/27.png" alt="Flyer 27" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/28.png" alt="Flyer 28" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                            </div>
+                            <!-- GRUPO 2: DUPLICADO -->
+                            <div class="flex h-full w-max gap-2 p-2 pr-4">
+                                <img src="img/1.png" alt="Flyer 1" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/2.jpg" alt="Flyer 2" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/3.jpg" alt="Flyer 3" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/4.jpg" alt="Flyer 4" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/5.png" alt="Flyer 5" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/6.jpg" alt="Flyer 6" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/7.png" alt="Flyer 7" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/8.png" alt="Flyer 8" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/9.png" alt="Flyer 9" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/10.jpg" alt="Flyer 10" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/11.jpg" alt="Flyer 11" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/12.png" alt="Flyer 12" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/13.png" alt="Flyer 13" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/14.jpg" alt="Flyer 14" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/15.jpg" alt="Flyer 15" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/16.jpg" alt="Flyer 16" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/17.jpg" alt="Flyer 17" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/18.jpg" alt="Flyer 18" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/19.jpg" alt="Flyer 19" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/20.png" alt="Flyer 20" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/21.jpg" alt="Flyer 21" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/22.jpg" alt="Flyer 22" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/23.jpg" alt="Flyer 23" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/24.png" alt="Flyer 24" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/25.png" alt="Flyer 25" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/26.png" alt="Flyer 26" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/27.png" alt="Flyer 27" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                                <img src="img/28.png" alt="Flyer 28" class="h-full aspect-[4/5] object-cover rounded-lg opacity-70 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                            </div>
+                        </div>
+                        <!-- Gradientes de borde -->
+                        <div class="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-brand-card to-transparent pointer-events-none"></div>
+                        <div class="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-brand-card to-transparent pointer-events-none"></div>
+                        <div class="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-brand-card to-transparent pointer-events-none"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problema / Solución -->
+    <section class="relative z-10 py-20 border-t border-brand-border bg-brand-dark/50 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start w-full">
+                <div class="w-full break-words">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-red-500/20 bg-red-500/10 mb-4">
+                        <span class="text-red-400 text-xs font-bold uppercase tracking-wider">El problema</span>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4 break-words">¿Tus flyers pasan <span class="text-brand-accent">desapercibidos</span>?</h2>
+                    <p class="text-gray-400 text-lg mb-6 leading-relaxed break-words">
+                        Si sentís que tus diseños no impactan, que no transmiten jerarquía o que no sabés cómo llevarlos al siguiente nivel, <strong class="text-white">no es tu culpa</strong>. Es porque te faltan las herramientas y el método correcto.
+                    </p>
+                    <div class="p-6 rounded-2xl bg-brand-card border border-brand-border relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-red-500/10 rounded-full blur-2xl"></div>
+                        <p class="italic text-gray-300 relative z-10 break-words">"Pasé de hacer diseños que pasaban desapercibidos a cobrar por flyers profesionales para clubes de mi ciudad."</p>
+                        <div class="mt-3 flex items-center gap-2 text-sm text-gray-400 relative z-10">
+                            <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                            Alumno de Ignacio Torchi
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full break-words">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/20 bg-green-500/10 mb-4">
+                        <span class="text-green-400 text-xs font-bold uppercase tracking-wider">La solución</span>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4 break-words">El método <span class="text-gradient-accent">Ignacio Torchi</span></h2>
+                    <p class="text-gray-400 text-lg mb-6 leading-relaxed break-words">
+                        Un sistema paso a paso, probado y validado por más de 500 diseñadores que ya están creando gráficos de élite. <strong class="text-white">Sin teoría aburrida, solo práctica real.</strong>
+                    </p>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-brand-card/60 p-4 rounded-xl border border-white/5">
+                            <div class="text-brand-accent text-2xl font-bold mb-1">100%</div>
+                            <div class="text-sm text-gray-400">Práctico, sin relleno</div>
+                        </div>
+                        <div class="bg-brand-card/60 p-4 rounded-xl border border-white/5">
+                            <div class="text-brand-accent text-2xl font-bold mb-1">24/7</div>
+                            <div class="text-sm text-gray-400">Acceso de por vida</div>
+                        </div>
+                        <div class="bg-brand-card/60 p-4 rounded-xl border border-white/5">
+                            <div class="text-brand-accent text-2xl font-bold mb-1">🎯</div>
+                            <div class="text-sm text-gray-400">Proyectos reales</div>
+                        </div>
+                        <div class="bg-brand-card/60 p-4 rounded-xl border border-white/5">
+                            <div class="text-brand-accent text-2xl font-bold mb-1">📦</div>
+                            <div class="text-sm text-gray-400">Recursos descargables</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cursos -->
+    <section id="cursos" class="relative z-10 py-24 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-4 break-words">Elegí tu <span class="text-brand-accent">camino</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">Cada curso está diseñado para llevarte de donde estás a donde querés estar.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start w-full">
+                
+                <!-- CURSO 1: PHOTOSHOP -->
+                <div class="bg-brand-card rounded-3xl border border-brand-border p-8 card-hover flex flex-col h-full relative overflow-hidden w-full">
+                    <div class="mb-6">
+                        <span class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Fundamentos</span>
+                        <h3 class="text-2xl font-bold mt-2 mb-3 break-words">Photoshop desde cero</h3>
+                        <p class="text-gray-400 text-sm line-clamp-3 break-words">Dominá Photoshop con un enfoque práctico y creativo. Herramientas, teoría visual y efectos profesionales.</p>
+                    </div>
+                    <div class="mb-6 space-y-2 text-sm text-gray-300">
+                        <div class="flex items-start gap-2">
+                            <span class="text-brand-accent">✅</span> Uso de herramientas clave
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="text-brand-accent">✅</span> Teoría del color y composición
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="text-brand-accent">✅</span> Acceso de por vida
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="text-brand-accent">✅</span> Proyectos prácticos
+                        </div>
+                    </div>
+                    <!-- PRECIO - PHOTOSHOP -->
+                    <div class="mb-6 mt-auto price-block">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="text-gray-500 line-through text-sm price-original" data-usd="U$D 59.99">$59.999</span>
+                            <span class="bg-red-500/10 text-red-500 text-xs font-bold px-2 py-0.5 rounded border border-red-500/20">-53%</span>
+                        </div>
+                        <div class="text-4xl font-extrabold text-white break-words">
+                            <span class="price-final" data-usd="U$D 27">$28.000</span><span class="text-sm text-gray-500 font-normal ml-1 price-currency">ARS</span>
+                        </div>
+                        <div class="mt-3 mp-badge inline-flex items-center gap-2 bg-[#009EE3]/10 border border-[#009EE3]/30 px-2.5 py-1.5 rounded-md">
+                            <span class="text-[#009EE3] text-xs font-bold tracking-wide">3 cuotas sin interés</span>
+                            <img src="img/logo-mp.svg" alt="Mercado Pago" class="h-4 w-auto">
+                        </div>
+                        <!-- 🔥 ÍCONOS INTERNACIONALES (OCULTOS POR DEFECTO) -->
+                        <div class="payment-icons-wrapper hidden flex items-center justify-center gap-2 mt-3">
+                            <span class="text-[10px] text-gray-400 uppercase tracking-wider mr-1">Aceptamos</span>
+                            <img src="img/paypal.svg" alt="PayPal" class="h-5 w-auto">
+                            <img src="img/binance.svg" alt="Binance" class="h-5 w-auto">
+                        </div>
+                    </div>
+                    <a href="https://ignaciotorchi.com/curso/adobe-photoshop-desde-0" target="_blank" class="w-full block text-center bg-gray-800 hover:bg-gray-700 text-white font-semibold py-3 rounded-xl transition-colors">Ver detalles</a>
+                </div>
+
+                <!-- CURSO 2: COMBO (DESTACADO) -->
+                <div class="bg-brand-card rounded-3xl border-2 border-brand-accent p-8 card-hover flex flex-col h-full relative overflow-hidden w-full shadow-[0_0_30px_rgba(79,70,229,0.2)]">
+                    <div class="absolute top-0 inset-x-0 bg-brand-accent text-white text-center text-xs font-bold py-1.5 uppercase tracking-wider">
+                        ⭐ EL MÁS VENDIDO
+                    </div>
+                    <div class="mb-6 mt-4">
+                        <span class="text-sm font-semibold text-brand-accent uppercase tracking-wider">Carrera completa</span>
+                        <h3 class="text-2xl font-bold mt-2 mb-3 break-words">Combo Nivel Pro</h3>
+                        <p class="text-gray-400 text-sm line-clamp-3 break-words">Llevate los dos cursos con un descuento especial. El camino definitivo para ser un diseñador deportivo de élite.</p>
+                    </div>
+                    <div class="mb-6 space-y-2 text-sm text-white">
+                        <div class="flex items-start gap-2 font-medium">
+                            <span class="text-brand-accent">🔥</span> Curso Photoshop Completo
+                        </div>
+                        <div class="flex items-start gap-2 font-medium">
+                            <span class="text-brand-accent">🔥</span> Curso Diseño de Flyers
+                        </div>
+                        <div class="flex items-start gap-2 text-gray-300">
+                            <span class="text-brand-accent">✅</span> Ahorro exclusivo de combo
+                        </div>
+                        <div class="flex items-start gap-2 text-gray-300">
+                            <span class="text-brand-accent">✅</span> Acceso a ambos cursos
+                        </div>
+                    </div>
+                    <!-- PRECIO - COMBO -->
+                    <div class="mb-6 mt-auto price-block">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="text-gray-500 line-through text-sm price-original" data-usd="U$D 104.99">$104.999</span>
+                            <span class="bg-red-500/10 text-red-500 text-xs font-bold px-2 py-0.5 rounded border border-red-500/20">-57%</span>
+                        </div>
+                        <div class="text-4xl font-extrabold text-white break-words">
+                            <span class="price-final" data-usd="U$D 43">$45.099</span><span class="text-sm text-gray-500 font-normal ml-1 price-currency">ARS</span>
+                        </div>
+                        <div class="mt-3 mp-badge inline-flex items-center gap-2 bg-[#009EE3]/10 border border-[#009EE3]/30 px-2.5 py-1.5 rounded-md">
+                            <span class="text-[#009EE3] text-xs font-bold tracking-wide">3 cuotas sin interés</span>
+                            <img src="img/logo-mp.svg" alt="Mercado Pago" class="h-4 w-auto">
+                        </div>
+                        <!-- 🔥 ÍCONOS INTERNACIONALES (OCULTOS POR DEFECTO) -->
+                        <div class="payment-icons-wrapper hidden flex items-center justify-center gap-2 mt-3">
+                            <span class="text-[10px] text-gray-400 uppercase tracking-wider mr-1">Aceptamos</span>
+                            <img src="img/paypal.svg" alt="PayPal" class="h-5 w-auto">
+                            <img src="img/binance.svg" alt="Binance" class="h-5 w-auto">
+                        </div>
+                    </div>
+                    <a href="https://ignaciotorchi.com/p/combo-photoshop-desde-0-flyers-deportivos-profesionales" target="_blank" class="w-full block text-center bg-brand-accent hover:bg-indigo-500 text-white font-bold py-4 rounded-xl transition-all shadow-[0_0_20px_rgba(79,70,229,0.3)] hover:shadow-[0_0_40px_rgba(79,70,229,0.5)]">Comprar Combo</a>
+                </div>
+
+                <!-- CURSO 3: FLYERS -->
+                <div class="bg-brand-card rounded-3xl border border-brand-border p-8 card-hover flex flex-col h-full relative overflow-hidden w-full">
+                    <div class="mb-6">
+                        <span class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Especialización</span>
+                        <h3 class="text-2xl font-bold mt-2 mb-3 break-words">Flyers Deportivos</h3>
+                        <p class="text-gray-400 text-sm line-clamp-3 break-words">Creá flyers deportivos profesionales como los de clubes y ligas reales. Photoshop, Illustrator e IA.</p>
+                    </div>
+                    <div class="mb-6 space-y-2 text-sm text-gray-300">
+                        <div class="flex items-start gap-2">
+                            <span class="text-brand-accent">✅</span> Matchdays y Resultados
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="text-brand-accent">✅</span> Composición e Iluminación Pro
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="text-brand-accent">✅</span> Integración con IA
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="text-brand-accent">✅</span> Exportación profesional
+                        </div>
+                    </div>
+                    <!-- PRECIO - FLYERS -->
+                    <div class="mb-6 mt-auto price-block">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="text-gray-500 line-through text-sm price-original" data-usd="U$D 59.99">$59.999</span>
+                            <span class="bg-red-500/10 text-red-500 text-xs font-bold px-2 py-0.5 rounded border border-red-500/20">-53%</span>
+                        </div>
+                        <div class="text-4xl font-extrabold text-white break-words">
+                            <span class="price-final" data-usd="U$D 28">$28.099</span><span class="text-sm text-gray-500 font-normal ml-1 price-currency">ARS</span>
+                        </div>
+                        <div class="mt-3 mp-badge inline-flex items-center gap-2 bg-[#009EE3]/10 border border-[#009EE3]/30 px-2.5 py-1.5 rounded-md">
+                            <span class="text-[#009EE3] text-xs font-bold tracking-wide">3 cuotas sin interés</span>
+                            <img src="img/logo-mp.svg" alt="Mercado Pago" class="h-4 w-auto">
+                        </div>
+                        <!-- 🔥 ÍCONOS INTERNACIONALES (OCULTOS POR DEFECTO) -->
+                        <div class="payment-icons-wrapper hidden flex items-center justify-center gap-2 mt-3">
+                            <span class="text-[10px] text-gray-400 uppercase tracking-wider mr-1">Aceptamos</span>
+                            <img src="img/paypal.svg" alt="PayPal" class="h-5 w-auto">
+                            <img src="img/binance.svg" alt="Binance" class="h-5 w-auto">
+                        </div>
+                    </div>
+                    <a href="https://ignaciotorchi.com/curso/curso-diseno-flyers-deportivos" target="_blank" class="w-full block text-center bg-gray-800 hover:bg-gray-700 text-white font-semibold py-3 rounded-xl transition-colors">Ver detalles</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonios -->
+    <section id="testimonios" class="relative z-10 py-20 border-t border-brand-border bg-brand-dark/30 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-4 break-words">Lo que dicen los <span class="text-brand-accent">alumnos</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">Más de 500 diseñadores ya llevaron sus flyers al siguiente nivel.</p>
+                <div class="mt-4 flex justify-center gap-6 text-sm flex-wrap">
+                    <span class="text-gray-400">⭐ 4.9/5 promedio</span>
+                    <span class="text-gray-400">🧑‍🎓 500+ alumnos</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+                <div class="bg-brand-card p-6 rounded-2xl border border-brand-border hover:border-brand-accent/50 transition-colors w-full">
+                    <div class="flex text-yellow-500 mb-3">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    </div>
+                    <p class="text-white mb-4 italic break-words">"Muy bueno! Explica re bien y se nota la experiencia."</p>
+                    <div class="flex items-center gap-3 mt-auto">
+                        <div class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center font-bold text-xs">JF</div>
+                        <span class="text-gray-400 text-sm font-medium">Joaquin Ferreira</span>
+                    </div>
+                </div>
+
+                <div class="bg-brand-card p-6 rounded-2xl border border-brand-border hover:border-brand-accent/50 transition-colors w-full">
+                    <div class="flex text-yellow-500 mb-3">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    </div>
+                    <p class="text-white mb-4 italic break-words">"10/10 el curso. Aprendí más en 2 semanas que en meses viendo tutoriales."</p>
+                    <div class="flex items-center gap-3 mt-auto">
+                        <div class="w-8 h-8 rounded-full bg-brand-accent/20 text-brand-accent flex items-center justify-center font-bold text-xs">AB</div>
+                        <span class="text-gray-400 text-sm font-medium">Andres Bricchi</span>
+                    </div>
+                </div>
+
+                <div class="bg-brand-card p-6 rounded-2xl border border-brand-border hover:border-brand-accent/50 transition-colors w-full">
+                    <div class="flex text-yellow-500 mb-3">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    </div>
+                    <p class="text-white mb-4 italic break-words">"Excelente curso, muy entendible y con ejemplos reales que sirven."</p>
+                    <div class="flex items-center gap-3 mt-auto">
+                        <div class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center font-bold text-xs">AM</div>
+                        <span class="text-gray-400 text-sm font-medium">Alejandro Martinez</span>
+                    </div>
+                </div>
+
+                <div class="bg-brand-card p-6 rounded-2xl border border-brand-border hover:border-brand-accent/50 transition-colors w-full">
+                    <div class="flex text-yellow-500 mb-3">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    </div>
+                    <p class="text-white mb-4 italic break-words">"Muy bueno y recomendable. Ya empecé a hacer flyers para mi club."</p>
+                    <div class="flex items-center gap-3 mt-auto">
+                        <div class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center font-bold text-xs">VO</div>
+                        <span class="text-gray-400 text-sm font-medium">Valentín Ortiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructor -->
+    <section class="relative z-10 py-20 border-t border-brand-border overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="flex flex-col md:flex-row items-center gap-12 w-full">
+                <div class="w-full md:w-1/2 relative flex justify-center">
+                    <div class="absolute inset-0 bg-brand-accent/20 blur-3xl rounded-full"></div>
+                    <img src="img/perfil-ignacio-torchi.jpg" alt="Ignacio Torchi" class="relative rounded-2xl border border-brand-border shadow-2xl object-cover w-full max-w-md mx-auto grayscale hover:grayscale-0 transition-all duration-500">
+                </div>
+                <div class="w-full md:w-1/2 break-words">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4 break-words">Aprendé con <br/><span class="text-brand-accent">Ignacio Torchi</span></h2>
+                    <p class="text-gray-400 mb-6 text-lg leading-relaxed break-words">
+                        Diseñador gráfico especializado en <strong class="text-white">Sports Design</strong>. Con más de 5 años creando contenido visual de alto impacto para clubes, ligas y marcas deportivas.
+                    </p>
+                    <p class="text-gray-400 mb-6 text-lg leading-relaxed break-words">
+                        A través de YouTube y plataformas educativas, ya enseñé a más de <strong class="text-white">500 alumnos</strong> a dominar el diseño deportivo. Mi método es práctico, directo y enfocado en resultados reales.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="https://www.youtube.com/c/IgnacioTorchi" target="_blank" class="flex items-center text-gray-300 hover:text-white transition-colors">
+                            <svg class="w-6 h-6 mr-2 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                            YouTube
+                        </a>
+                        <a href="https://ignaciotorchi.com/" target="_blank" class="flex items-center text-gray-300 hover:text-white transition-colors">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                            Sitio oficial
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comunidad (Seguidores IG y TK) -->
+    <section class="relative z-10 py-16 border-t border-brand-border bg-brand-dark/50">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-8 text-white">Nuestra comunidad</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-xl mx-auto">
+                
+                <!-- Instagram -->
+                <div class="flex flex-col items-center justify-center p-8 bg-brand-card rounded-2xl border border-brand-border w-full h-full min-h-[180px] card-hover">
+                    <img src="img/instagram.svg" alt="Instagram" class="w-10 h-10 mb-2">
+                    <span class="text-4xl font-bold text-white" id="insta-followers">Cargando...</span>
+                    <span class="text-sm text-gray-400">Seguidores en Instagram</span>
+                </div>
+
+                <!-- TikTok -->
+                <div class="flex flex-col items-center justify-center p-8 bg-brand-card rounded-2xl border border-brand-border w-full h-full min-h-[180px] card-hover">
+                    <img src="img/tiktok.svg" alt="TikTok" class="w-10 h-10 mb-2">
+                    <span class="text-4xl font-bold text-white" id="tiktok-followers">Cargando...</span>
+                    <span class="text-sm text-gray-400">Seguidores en TikTok</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="relative z-10 py-20 bg-brand-accent/5 border-t border-brand-border overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 text-center w-full">
+            <h2 class="text-3xl font-bold mb-4 break-words">Enterate de nuestras novedades</h2>
+            <p class="text-gray-400 mb-8 break-words">Recibí promociones, material gratuito y contenido exclusivo para diseñadores deportivos.</p>
+            <form class="flex flex-col sm:flex-row gap-3 justify-center max-w-lg mx-auto w-full">
+                <input type="email" placeholder="Tu correo electrónico" class="bg-brand-card border border-brand-border text-white rounded-lg px-4 py-3 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent w-full" required>
+                <button type="submit" class="bg-white text-black font-bold px-6 py-3 rounded-lg hover:bg-gray-200 transition-colors whitespace-nowrap">Suscribirme</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-brand-border bg-brand-dark py-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6 w-full">
+            <a href="#" class="flex items-center transition-transform hover:scale-105">
+                <img src="img/logo-ignacio-torchi.svg" alt="Ignacio Torchi Logo" class="h-8 w-auto">
+            </a>
+            <div class="text-gray-500 text-sm text-center md:text-left">
+                &copy; 2026 Ignacio Torchi. Todos los derechos reservados.
+            </div>
+            <div class="flex gap-4 text-gray-500">
+                <a href="#" class="hover:text-white transition-colors">Términos</a>
+                <a href="#" class="hover:text-white transition-colors">Privacidad</a>
+                <a href="https://www.instagram.com/ignaciotorchi/" target="_blank" class="hover:text-white transition-colors">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 10) {
+                nav.classList.add('shadow-lg');
+                nav.classList.replace('bg-transparent', 'bg-brand-dark/80');
+            } else {
+                nav.classList.remove('shadow-lg');
+                nav.classList.replace('bg-brand-dark/80', 'bg-transparent');
+            }
+        });
+
+        // Contador regresivo de 14 minutos
+        (function() {
+            const ahora = new Date();
+            const expiracion = new Date(ahora.getTime() + 14 * 60 * 1000); // 14 minutos
+            function actualizarContador() {
+                const ahora = new Date();
+                const diff = expiracion - ahora;
+                if (diff <= 0) {
+                    document.getElementById('hours').textContent = '00';
+                    document.getElementById('minutes').textContent = '00';
+                    document.getElementById('seconds').textContent = '00';
+                    return;
+                }
+                const hours = Math.floor(diff / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            }
+            actualizarContador();
+            setInterval(actualizarContador, 1000);
+        })();
+
+        // Detección de país y precios internacionales
+        async function aplicarPreciosInternacionales() {
+            try {
+                const url = 'https://ipwho.is/?nocache=' + new Date().getTime();
+                const respuesta = await fetch(url);
+                const datos = await respuesta.json();
+                const pais = datos.country_code;
+                console.log("📍 País detectado:", pais);
+                
+                if (pais && pais !== 'AR') {
+                    console.log("💵 Mostrando precios en USD");
+                    
+                    // Ocultar cuotas de Mercado Pago
+                    document.querySelectorAll('.mp-badge').forEach(el => el.style.display = 'none');
+                    
+                    // 🔥 MOSTRAR ÍCONOS DE PAYPAL Y BINANCE
+                    document.querySelectorAll('.payment-icons-wrapper').forEach(el => el.classList.remove('hidden'));
+
+                    // 🔥 CENTRAR PRECIOS Y LOGOS EN MODO USD
+                    document.querySelectorAll('.price-block').forEach(el => {
+                        el.classList.add('flex', 'flex-col', 'items-center', 'text-center');
+                        
+                        // Ajustar la fila superior (precio original y descuento) para que se centre
+                        const topRow = el.querySelector('div.flex.items-center.gap-2');
+                        if (topRow) topRow.classList.add('justify-center');
+
+                        // Ajustar el badge de Mercado Pago para que se centre
+                        const badge = el.querySelector('.mp-badge');
+                        if (badge) badge.classList.add('justify-center');
+                    });
+
+                    // Cambiar precios
+                    document.querySelectorAll('.price-original').forEach(el => {
+                        if (el.getAttribute('data-usd')) el.innerText = el.getAttribute('data-usd');
+                    });
+                    document.querySelectorAll('.price-final').forEach(el => {
+                        if (el.getAttribute('data-usd')) el.innerText = el.getAttribute('data-usd');
+                    });
+                    document.querySelectorAll('.price-currency').forEach(el => el.innerText = '');
+                } else {
+                    console.log("🧉 Precios en ARS");
+                }
+            } catch (error) {
+                console.error("⚠️ Error al consultar la ubicación:", error);
+            }
+        }
+        aplicarPreciosInternacionales();
+
+        // =============================================
+        // LÓGICA PARA OBTENER SEGUIDORES DE REDES
+        // =============================================
+        async function obtenerSeguidores() {
+            try {
+                const instagramRes = await fetch('http://localhost:3000/api/instagram/ignaciotorchi');
+                if (instagramRes.ok) {
+                    const instagramData = await instagramRes.json();
+                    const elementoInsta = document.getElementById('insta-followers');
+                    if (elementoInsta && instagramData.followers) {
+                        elementoInsta.innerText = instagramData.followers;
+                    }
+                } else {
+                    document.getElementById('insta-followers').innerText = 'Error API';
+                }
+
+                const tiktokRes = await fetch('http://localhost:3000/api/tiktok/ignaciotorchi');
+                if (tiktokRes.ok) {
+                    const tiktokData = await tiktokRes.json();
+                    const elementoTikTok = document.getElementById('tiktok-followers');
+                    if (elementoTikTok && tiktokData.followers) {
+                        elementoTikTok.innerText = tiktokData.followers;
+                    }
+                } else {
+                    document.getElementById('tiktok-followers').innerText = 'Error API';
+                }
+            } catch (error) {
+                console.error("Error al conectar con el servidor:", error);
+                document.getElementById('insta-followers').innerText = 'Error conexión';
+                document.getElementById('tiktok-followers').innerText = 'Error conexión';
+            }
+        }
+        
+        obtenerSeguidores();
+        setInterval(obtenerSeguidores, 300000);
+    </script>
+</body>
+</html>
