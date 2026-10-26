@@ -12,9 +12,15 @@
   "commerce": {
     "verifiedOn": "2026-10-25",
     "defaultCurrency": "USD",
-    "geoEndpoint": ["https://ipapi.co/json/", "https://ipwho.is/?fields=success,country_code"],
+    "geoEndpoint": [
+      "https://ipapi.co/json/",
+      "https://ipwho.is/?fields=success,country_code"
+    ],
     "geoTimeoutMs": 5000,
-    "payments": {"ARS": "Mercado Pago · Transferencia bancaria", "USD": "PayPal · Binance"},
+    "payments": {
+      "ARS": "Mercado Pago · Transferencia bancaria",
+      "USD": "PayPal · Binance"
+    },
     "currencyTransferSupported": false
   },
   "analytics": {
@@ -22,10 +28,15 @@
     "ga4Id": "G-11414884467",
     "gtmId": "",
     "metaPixelId": "",
-    "productionHosts": ["cursos.ignaciotorchi.com"],
+    "productionHosts": [
+      "cursos.ignaciotorchi.com"
+    ],
     "notes": "GA4 conservado del sitio actual; verificar recepción en DebugView. Elegir ga4 O gtm, nunca ambos. No se emiten begin_checkout ni purchase desde esta landing."
   },
-  "media": {"instructorVideo": null, "studentWork": []},
+  "media": {
+    "instructorVideo": null,
+    "studentWork": []
+  },
   "courses": [
     {
       "id": "photoshop",
@@ -33,16 +44,25 @@
       "label": "01 / FUNDAMENTOS",
       "audience": "Nunca usaste Photoshop o querés una base más sólida.",
       "description": "Entendé las herramientas y empezá a componer con criterio, desde tu primer archivo hasta tu portfolio.",
-      "prices": {"ARS": 31050, "USD": 31},
+      "prices": {
+        "ARS": 31050,
+        "USD": 31
+      },
       "url": "https://ignaciotorchi.com/curso/adobe-photoshop-desde-0",
       "reviewsUrl": "https://ignaciotorchi.com/curso/adobe-photoshop-desde-0/opiniones",
-      "image": "28",
-      "imageAlt": "Composición de fútbol con integración de color y efectos de Ignacio Torchi",
-      "benefits": ["Herramientas, capas y máscaras", "Tipografía, color y composición", "Edición, fotomontajes e IA", "Proyecto final y portfolio en Behance"],
+      "imageAlt": "Portada oficial de Photoshop desde cero en Ignacio Torchi",
+      "benefits": [
+        "Herramientas, capas y máscaras",
+        "Tipografía, color y composición",
+        "Edición, fotomontajes e IA",
+        "Proyecto final y portfolio en Behance"
+      ],
       "requirement": "Sin experiencia previa. Computadora con Photoshop instalado e internet.",
       "access": "Clases grabadas · Acceso de por vida",
       "cta": "Elegir Photoshop",
-      "sampleLabel": "Ver clases gratuitas de Photoshop"
+      "sampleLabel": "Ver clases gratuitas de Photoshop",
+      "cover": "assets/cover-photoshop.jpg",
+      "coverSource": "https://d3ekkp2oigezer.cloudfront.net/business/52617/products/pbqyaw_685f1452bc5d2_medium.jpg"
     },
     {
       "id": "combo",
@@ -50,14 +70,23 @@
       "label": "02 / EL RECORRIDO COMPLETO",
       "audience": "Querés empezar desde cero y especializarte en deporte.",
       "description": "Primero dominá la herramienta. Después aplicala al universo del diseño deportivo. Ambos cursos en un mismo combo.",
-      "prices": {"ARS": 55300, "USD": 55.3},
+      "prices": {
+        "ARS": 55300,
+        "USD": 55.3
+      },
       "url": "https://ignaciotorchi.com/p/combo-photoshop-desde-0-flyers-deportivos-profesionales",
-      "image": "24",
-      "imageAlt": "Diseño deportivo de Robert Lewandowski creado por Ignacio Torchi",
-      "benefits": ["Incluye los dos cursos completos", "Fundamentos de Photoshop desde cero", "Especialización en flyers deportivos", "Ejercicios y proyectos aplicados"],
+      "imageAlt": "Portada oficial de Photoshop + Flyers Deportivos en Ignacio Torchi",
+      "benefits": [
+        "Incluye los dos cursos completos",
+        "Fundamentos de Photoshop desde cero",
+        "Especialización en flyers deportivos",
+        "Ejercicios y proyectos aplicados"
+      ],
       "requirement": "Sin experiencia previa. Empezá por Photoshop y seguí con Flyers.",
       "access": "2 cursos · Un recorrido progresivo",
-      "cta": "Elegir el combo"
+      "cta": "Elegir el combo",
+      "cover": "assets/cover-combo.png",
+      "coverSource": "https://d3ekkp2oigezer.cloudfront.net/business/52617/products/gwQGAn_69608cc29cd38_medium.png"
     },
     {
       "id": "flyers",
@@ -65,40 +94,125 @@
       "label": "03 / ESPECIALIZACIÓN",
       "audience": "Ya conocés Photoshop y querés mejorar tus flyers.",
       "description": "Construí piezas con jerarquía, profundidad e identidad. Trabajá el proceso completo, del recorte al acabado.",
-      "prices": {"ARS": 35600, "USD": 35.6},
+      "prices": {
+        "ARS": 35600,
+        "USD": 35.6
+      },
       "url": "https://ignaciotorchi.com/curso/curso-diseno-flyers-deportivos",
       "reviewsUrl": "https://ignaciotorchi.com/curso/curso-diseno-flyers-deportivos/opiniones",
-      "image": "20",
-      "imageAlt": "Flyer de Antoine Griezmann y Orlando City con composición y luces de Ignacio Torchi",
-      "benefits": ["Composición y jerarquía visual", "Recortes, fondos y texturas", "Luces, sombras y Camera Raw", "Illustrator, IA y tutoriales completos"],
+      "imageAlt": "Portada oficial de Flyers Deportivos en Ignacio Torchi",
+      "benefits": [
+        "Composición y jerarquía visual",
+        "Recortes, fondos y texturas",
+        "Luces, sombras y Camera Raw",
+        "Illustrator, IA y tutoriales completos"
+      ],
       "requirement": "Requiere conocimientos básicos de Photoshop.",
       "access": "Clases en video · Proyecto final",
       "cta": "Elegir Flyers Deportivos",
-      "sampleLabel": "Ver clases gratuitas de Flyers"
+      "sampleLabel": "Ver clases gratuitas de Flyers",
+      "cover": "assets/cover-flyers.jpg",
+      "coverSource": "https://d3ekkp2oigezer.cloudfront.net/business/52617/products/WQv9GG_6abe7e34b99e9_medium.jpg"
     }
   ],
   "gallery": [
-    {"image":"1", "title":"El partido empieza en el diseño.", "category":"Flyers de partidos", "technique":"Composición y jerarquía", "alt":"Flyer Arsenal vs. Real Betis, con figuras de jugadores y tipografía amarilla", "course":"flyers"},
-    {"image":"24", "title":"Un jugador. Toda la atención.", "category":"Presentación de jugadores", "technique":"Recorte e integración", "alt":"Composición deportiva de Lewandowski en tonos celestes y rojos", "course":"flyers"},
-    {"image":"8", "title":"La luz también cuenta historias.", "category":"Composición e iluminación", "technique":"Luces, sombras y Camera Raw", "alt":"Diseño de Lionel Messi con collage, texturas y contraste", "course":"flyers"},
-    {"image":"28", "title":"Construí tu propio universo.", "category":"Texturas y efectos", "technique":"Fotomontaje y color", "alt":"Flyer de fútbol con composición rosa, efectos y jugador en acción", "course":"photoshop"}
+    {
+      "image": "1",
+      "title": "El partido empieza en el diseño.",
+      "category": "Flyers de partidos",
+      "technique": "Composición y jerarquía",
+      "alt": "Flyer Arsenal vs. Real Betis, con figuras de jugadores y tipografía amarilla",
+      "course": "flyers"
+    },
+    {
+      "image": "24",
+      "title": "Un jugador. Toda la atención.",
+      "category": "Presentación de jugadores",
+      "technique": "Recorte e integración",
+      "alt": "Composición deportiva de Lewandowski en tonos celestes y rojos",
+      "course": "flyers"
+    },
+    {
+      "image": "8",
+      "title": "La luz también cuenta historias.",
+      "category": "Composición e iluminación",
+      "technique": "Luces, sombras y Camera Raw",
+      "alt": "Diseño de Lionel Messi con collage, texturas y contraste",
+      "course": "flyers"
+    },
+    {
+      "image": "28",
+      "title": "Construí tu propio universo.",
+      "category": "Texturas y efectos",
+      "technique": "Fotomontaje y color",
+      "alt": "Flyer de fútbol con composición rosa, efectos y jugador en acción",
+      "course": "photoshop"
+    }
   ],
   "testimonials": [
-    {"name":"Joaquin Ferreira", "quote":"Muy bueno!", "course":"Flyers Deportivos", "source":"https://ignaciotorchi.com/curso/curso-diseno-flyers-deportivos/opiniones"},
-    {"name":"Andres Bricchi", "quote":"10/10 el curso", "course":"Flyers Deportivos", "source":"https://ignaciotorchi.com/curso/curso-diseno-flyers-deportivos/opiniones"},
-    {"name":"valentin ortiz", "quote":"Muy bueno y recomendable.", "course":"Flyers Deportivos", "source":"https://ignaciotorchi.com/curso/curso-diseno-flyers-deportivos/opiniones"}
+    {
+      "name": "Joaquin Ferreira",
+      "quote": "Muy bueno!",
+      "course": "Flyers Deportivos",
+      "source": "https://ignaciotorchi.com/curso/curso-diseno-flyers-deportivos/opiniones"
+    },
+    {
+      "name": "Andres Bricchi",
+      "quote": "10/10 el curso",
+      "course": "Flyers Deportivos",
+      "source": "https://ignaciotorchi.com/curso/curso-diseno-flyers-deportivos/opiniones"
+    },
+    {
+      "name": "valentin ortiz",
+      "quote": "Muy bueno y recomendable.",
+      "course": "Flyers Deportivos",
+      "source": "https://ignaciotorchi.com/curso/curso-diseno-flyers-deportivos/opiniones"
+    }
   ],
   "faq": [
-    ["¿Necesito saber Photoshop?", "Para Photoshop desde cero y el combo no necesitás experiencia. Flyers Deportivos sí requiere conocimientos básicos de Photoshop."],
-    ["¿Qué curso debería comprar?", "Si empezás de cero, elegí Photoshop. Si querés aprender la herramienta y después aplicarla al deporte, elegí el combo. Si ya manejás lo básico y buscás mejorar tus piezas deportivas, elegí Flyers."],
-    ["¿Las clases son grabadas?", "Sí. Photoshop se ofrece con clases grabadas, y Flyers con clases en video y tutoriales del proceso en pantalla. Podés consultar las lecciones en el temario de cada curso."],
-    ["¿Puedo aprender a mi ritmo?", "Photoshop permite avanzar sin horarios fijos y repetir sus módulos. Flyers está organizado en clases en video y prácticas para recorrer el proceso de diseño paso a paso."],
-    ["¿Cuánto tiempo tengo acceso?", "Photoshop publica acceso de por vida. La ficha de Flyers consultada no especifica un plazo de acceso; podés confirmar esa condición por WhatsApp antes de elegir Flyers o el combo."],
-    ["¿Qué programas necesito?", "Para Photoshop desde cero necesitás Adobe Photoshop instalado en una computadora con internet. Flyers también incorpora Illustrator y herramientas de IA; revisá el temario para conocer qué se usa en cada módulo."],
-    ["¿El software Adobe está incluido?", "El combo aclara que no incluye Adobe Photoshop. La compra es formación: necesitás disponer del software por separado. Photoshop desde cero exige tenerlo instalado; no se ofrece una licencia Adobe como parte de esta landing."],
-    ["¿Qué sucede después de comprar?", "La compra, la inscripción y el acceso al contenido se gestionan en Tiendup. Seguí las instrucciones de esa plataforma y usá el acceso de alumnos. Los tiempos de acreditación y habilitación deben confirmarse según el medio de pago elegido."],
-    ["¿Qué medios de pago aceptan?", "En pesos argentinos: Mercado Pago y transferencia bancaria. En dólares: PayPal y Binance. Elegí la moneda en la página de Tiendup y revisá las condiciones antes de pagar."],
-    ["¿Puedo comprar desde otro país?", "Los tres productos ofrecen precios en dólares y medios de pago internacionales. Cambiá el selector a USD y elegí Dólares estadounidenses en Tiendup. La disponibilidad del medio de pago puede depender de tu país."],
-    ["¿Puedo ver clases gratuitas antes de comprar?", "Sí. Photoshop y Flyers tienen lecciones señaladas como Contenido Gratuito en sus temarios. Tiendup puede pedir un registro gratuito para acceder; su formulario indica que no exige tarjeta ni datos de pago."]
+    [
+      "¿Necesito saber Photoshop?",
+      "Para Photoshop desde cero y el combo no necesitás experiencia. Flyers Deportivos sí requiere conocimientos básicos de Photoshop."
+    ],
+    [
+      "¿Qué curso debería comprar?",
+      "Si empezás de cero, elegí Photoshop. Si querés aprender la herramienta y después aplicarla al deporte, elegí el combo. Si ya manejás lo básico y buscás mejorar tus piezas deportivas, elegí Flyers."
+    ],
+    [
+      "¿Las clases son grabadas?",
+      "Sí. Photoshop se ofrece con clases grabadas, y Flyers con clases en video y tutoriales del proceso en pantalla. Podés consultar las lecciones en el temario de cada curso."
+    ],
+    [
+      "¿Puedo aprender a mi ritmo?",
+      "Photoshop permite avanzar sin horarios fijos y repetir sus módulos. Flyers está organizado en clases en video y prácticas para recorrer el proceso de diseño paso a paso."
+    ],
+    [
+      "¿Cuánto tiempo tengo acceso?",
+      "Photoshop publica acceso de por vida. La ficha de Flyers consultada no especifica un plazo de acceso; podés confirmar esa condición por WhatsApp antes de elegir Flyers o el combo."
+    ],
+    [
+      "¿Qué programas necesito?",
+      "Para Photoshop desde cero necesitás Adobe Photoshop instalado en una computadora con internet. Flyers también incorpora Illustrator y herramientas de IA; revisá el temario para conocer qué se usa en cada módulo."
+    ],
+    [
+      "¿El software Adobe está incluido?",
+      "El combo aclara que no incluye Adobe Photoshop. La compra es formación: necesitás disponer del software por separado. Photoshop desde cero exige tenerlo instalado; no se ofrece una licencia Adobe como parte de esta landing."
+    ],
+    [
+      "¿Qué sucede después de comprar?",
+      "La compra, la inscripción y el acceso al contenido se gestionan en Tiendup. Seguí las instrucciones de esa plataforma y usá el acceso de alumnos. Los tiempos de acreditación y habilitación deben confirmarse según el medio de pago elegido."
+    ],
+    [
+      "¿Qué medios de pago aceptan?",
+      "En pesos argentinos: Mercado Pago y transferencia bancaria. En dólares: PayPal y Binance. Elegí la moneda en la página de Tiendup y revisá las condiciones antes de pagar."
+    ],
+    [
+      "¿Puedo comprar desde otro país?",
+      "Los tres productos ofrecen precios en dólares y medios de pago internacionales. Cambiá el selector a USD y elegí Dólares estadounidenses en Tiendup. La disponibilidad del medio de pago puede depender de tu país."
+    ],
+    [
+      "¿Puedo ver clases gratuitas antes de comprar?",
+      "Sí. Photoshop y Flyers tienen lecciones señaladas como Contenido Gratuito en sus temarios. Tiendup puede pedir un registro gratuito para acceder; su formulario indica que no exige tarjeta ni datos de pago."
+    ]
   ]
 }
