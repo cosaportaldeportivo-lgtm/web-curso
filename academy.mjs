@@ -1,9 +1,11 @@
-import { currencies, resolveCurrency, formatPrice, attribution, commerceUrl } from './commerce.mjs';
+import { currencies, resolveCurrency, formatPrice, attribution, commerceUrl, lookupCountry } from './commerce.mjs';
 const config = JSON.parse(document.getElementById('site-config').textContent);
 const read = (store,key) => {try { return window[store].getItem(key); } catch { return null; }};
 const write = (store,key,value) => {try { window[store].setItem(key,value); } catch { /* Browsing remains fully functional with storage disabled. */ }};
-const saved = read('localStorage','it.currency.v1');
+const saved = read('localStorage','it.currency.v2');
 let manualCurrency = currencies.includes(saved) ? saved : null;
+let detectedCountry = null;
+let detectionState = 'pending';
 let currency = resolveCurrency({manual:manualCurrency,fallback:config.commerce.defaultCurrency});
 let consent = read('localStorage','it.consent.v1');
 let initialized = false;
@@ -69,29 +71,32 @@ function rewriteCommerceLinks() {
   });
 }
 function renderCurrency() {
-  document.querySelectorAll('[data-currency]').forEach(s=>s.value=currency);
+  document.querySelectorAll('[data-currency]').forEach(s=>s.value=manualCurrency || 'AUTO');
   document.querySelectorAll('[data-price]').forEach(el=>el.textContent=formatPrice(courseById(el.dataset.price).prices[currency],currency));
   document.querySelectorAll('.price-currency').forEach(el=>el.textContent=currency);
   document.querySelectorAll('[data-payment]').forEach(el=>el.textContent=config.commerce.payments[currency]);
+  document.getElementById('currency-status').textContent=manualCurrency ? 'Moneda elegida manualmente. Elegí Automático para usar tu país.' : detectionState==='pending' ? 'Detectando tu país por IP…' : detectedCountry ? `Moneda automática según tu país: ${currency}.` : 'No pudimos detectar tu país. Podés elegir ARS o USD.';
   document.getElementById('currency-note').textContent=`Estás viendo precios en ${currency}. Al continuar en Tiendup, elegí ${currency==='ARS'?'Pesos argentinos':'Dólares estadounidenses'}.`;
   const selected=document.querySelector('input[name="goal"]:checked');if(selected)renderRecommendation(selected.value,false);
 }
 document.querySelectorAll('[data-currency]').forEach(select=>select.addEventListener('change',()=>{
-  if (!currencies.includes(select.value)) return;
-  manualCurrency=select.value; currency=manualCurrency;write('localStorage','it.currency.v1',currency);renderCurrency();dispatch('currency_select',{selected_currency:currency});
+  if (!['AUTO',...currencies].includes(select.value)) return;
+  manualCurrency=select.value==='AUTO'?null:select.value;
+  write('localStorage','it.currency.v2',manualCurrency || 'AUTO');
+  currency=resolveCurrency({manual:manualCurrency,country:detectedCountry,fallback:config.commerce.defaultCurrency});
+  renderCurrency();dispatch('currency_select',{selected_currency:currency,selection_mode:manualCurrency?'manual':'automatic'});
+  if(!manualCurrency)detectCountry();
 }));
+let detectionRequest = 0;
 async function detectCountry() {
-  if(manualCurrency || !config.commerce.geoEndpoint) return;
-  const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),config.commerce.geoTimeoutMs);
-  try {
-    const response=await fetch(config.commerce.geoEndpoint,{signal:controller.signal,credentials:'omit',referrerPolicy:'no-referrer'});
-    if(!response.ok)return;const data=await response.json();
-    if(data.success!==false && /^[A-Z]{2}$/.test(data.country_code||'')) {
-      // Re-read manual preference after the asynchronous lookup: it always wins.
-      currency=resolveCurrency({manual:manualCurrency,country:data.country_code,fallback:config.commerce.defaultCurrency});renderCurrency();
-    }
-  } catch { /* Network failure keeps the explicit default and manual selector. */ }
-  finally {clearTimeout(timer);}
+  if(manualCurrency) return;
+  const request=++detectionRequest;
+  detectionState='pending';renderCurrency();
+  const country=await lookupCountry(config.commerce.geoEndpoint,config.commerce.geoTimeoutMs);
+  if(request!==detectionRequest)return;
+  detectedCountry=country;detectionState=country?'resolved':'failed';
+  currency=resolveCurrency({manual:manualCurrency,country,fallback:config.commerce.defaultCurrency});
+  renderCurrency();
 }
 function renderRecommendation(id,track=true) {
   const c=courseById(id);if(!c)return;

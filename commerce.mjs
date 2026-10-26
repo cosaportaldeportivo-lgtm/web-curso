@@ -1,4 +1,25 @@
 export const currencies = ['ARS', 'USD'];
+export async function lookupCountry(endpoint, timeoutMs=5000, fetcher=fetch) {
+  if (Array.isArray(endpoint)) {
+    for (const provider of endpoint) {
+      const country = await lookupCountry(provider,timeoutMs,fetcher);
+      if (country) return country;
+    }
+    return null;
+  }
+  if (!endpoint) return null;
+  const controller = new AbortController();
+  const timer = setTimeout(()=>controller.abort(),timeoutMs);
+  try {
+    const url = new URL(endpoint);
+    url.searchParams.set('nocache',Date.now().toString());
+    const response = await fetcher(url.href,{signal:controller.signal,credentials:'omit',referrerPolicy:'no-referrer',cache:'no-store'});
+    if (!response.ok) return null;
+    const data = await response.json();
+    return data.success!==false && !data.error && /^[A-Z]{2}$/.test(data.country_code || '') ? data.country_code : null;
+  } catch { return null; }
+  finally { clearTimeout(timer); }
+}
 export function resolveCurrency({manual, country, fallback='USD'}) {
   if (currencies.includes(manual)) return manual;
   if (/^[A-Z]{2}$/.test(country || '')) return country === 'AR' ? 'ARS' : 'USD';

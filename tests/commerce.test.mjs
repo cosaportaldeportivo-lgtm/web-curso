@@ -40,3 +40,33 @@ test('generated HTML contains real fallback content, valid anchors and no fake s
  for(const q of config.testimonials)assert.ok(html.includes(q.quote));
  assert.equal(fs.readFileSync(new URL('../CNAME',import.meta.url),'utf8').trim(),'cursos.ignaciotorchi.com');
 });
+import {lookupCountry} from '../commerce.mjs';
+test('country lookup bypasses cache and maps Argentina and international visitors',async()=>{
+ for(const country of ['AR','US','MX']) {
+  const result=await lookupCountry('https://ipwho.is/',5000,async(url,options)=>{
+   assert.ok(new URL(url).searchParams.has('nocache'));
+   assert.equal(options.cache,'no-store');
+   return {ok:true,json:async()=>({success:true,country_code:country})};
+  });
+  assert.equal(resolveCurrency({country:result}),country==='AR'?'ARS':'USD');
+ }
+});
+test('country lookup fails safely and late response never overrides manual selection',async()=>{
+ assert.equal(await lookupCountry('https://ipwho.is/',10,async()=>{throw Error('offline')}),null);
+ assert.equal(await lookupCountry('https://ipwho.is/',10,async()=>({ok:true,json:async()=>({success:false})})),null);
+ let complete;
+ const pending=lookupCountry('https://ipwho.is/',5000,()=>new Promise(resolve=>complete=resolve));
+ const manual='USD';
+ complete({ok:true,json:async()=>({country_code:'AR'})});
+ assert.equal(resolveCurrency({manual,country:await pending}),'USD');
+ assert.equal(await lookupCountry('https://ipwho.is/',5,(_url,{signal})=>new Promise((_resolve,reject)=>signal.addEventListener('abort',()=>reject(Error('timeout'))))),null);
+});
+test('second provider resolves country when first is unavailable',async()=>{
+ const visited=[];
+ const country=await lookupCountry(['https://first.example/','https://second.example/'],100,async(url)=>{
+  visited.push(new URL(url).hostname);
+  return visited.length===1?{ok:false}:{ok:true,json:async()=>({country_code:'AR'})};
+ });
+ assert.equal(country,'AR');
+ assert.deepEqual(visited,['first.example','second.example']);
+});

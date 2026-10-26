@@ -25,7 +25,7 @@ Valores consultados en los productos de Tiendup el 25/10/2026:
 
 No existe sincronización automática de precios: actualizar ambos importes en `courses[].prices` cuando cambien en Tiendup y volver a construir. No se calcula un tipo de cambio.
 
-Sin preferencia previa, ipwho.is determina país aproximado: AR usa ARS; otros países o fallo de red usan USD. La selección manual se conserva y tiene prioridad incluso si la respuesta de país llega más tarde. No se solicita GPS.
+Sin preferencia previa, ipapi.co (con ipwho.is como respaldo) determina país aproximado: AR usa ARS; otros países o fallo de red usan USD. La selección manual se conserva y tiene prioridad incluso si la respuesta de país llega más tarde. No se solicita GPS.
 
 Los botones llevan a las URLs reales de producto. No hay un enlace de checkout ni un parámetro de moneda verificados; por eso se explica que la moneda debe elegirse nuevamente en Tiendup. Mercado Pago y transferencia corresponden a ARS; PayPal y Binance a USD. La landing no cobra ni modifica productos.
 
@@ -54,3 +54,7 @@ Se usan diseños y retrato reales del repositorio. Galería ampliable con origin
 - Pendiente tras publicar: comprobar geolocalización desde países reales, GA4 DebugView/Realtime, indexación y vista previa social. Verificar compras en Tiendup por separado si se desea medir conversiones reales.
 
 La estructura HTML incluye contenido sin depender de JavaScript, enlaces navegables, textos alternativos, salto al contenido, foco visible, controles nativos, movimiento reducido, canonical, Open Graph y sitemap. El selector dinámico requiere JavaScript; sin él se muestran precios USD y enlaces funcionales.
+
+## Ajuste de moneda automática — 26/10/2026
+
+El selector incluye Automático: vuelve a consultar el país en cada visita y permite salir de una selección manual. Se reinician las preferencias v1 de la vista previa para descartar el USD guardado durante QA; las nuevas elecciones manuales se conservan en v2. Consultas sin caché, timeout de 5 segundos por proveedor y aviso visible si ambos fallan. Se verificó respuesta AR del proveedor alternativo; ipwho.is devolvió 429 durante la revisión. Los proveedores externos tienen cuotas: dimensionar un plan para el tráfico de producción si fuera necesario.

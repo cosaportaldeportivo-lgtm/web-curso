@@ -12,8 +12,8 @@
   "commerce": {
     "verifiedOn": "2026-10-25",
     "defaultCurrency": "USD",
-    "geoEndpoint": "https://ipwho.is/",
-    "geoTimeoutMs": 1800,
+    "geoEndpoint": ["https://ipapi.co/json/", "https://ipwho.is/?fields=success,country_code"],
+    "geoTimeoutMs": 5000,
     "payments": {"ARS": "Mercado Pago · Transferencia bancaria", "USD": "PayPal · Binance"},
     "currencyTransferSupported": false
   },
