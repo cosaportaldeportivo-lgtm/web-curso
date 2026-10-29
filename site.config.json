@@ -112,7 +112,12 @@
       "cta": "Elegir Flyers Deportivos",
       "sampleLabel": "Ver clases gratuitas de Flyers",
       "cover": "assets/cover-flyers.jpg",
-      "coverSource": "https://d3ekkp2oigezer.cloudfront.net/business/52617/products/WQv9GG_6abe7e34b99e9_medium.jpg"
+      "coverSource": "https://d3ekkp2oigezer.cloudfront.net/business/52617/products/WQv9GG_6abe7e34b99e9_medium.jpg",
+      "originalPrices": {
+        "ARS": 89000,
+        "USD": 89
+      },
+      "offerVerifiedOn": "2026-10-29"
     }
   ],
   "gallery": [
