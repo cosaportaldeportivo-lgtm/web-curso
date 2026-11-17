@@ -10,7 +10,7 @@
     "login": "https://ignaciotorchi.com/login"
   },
   "commerce": {
-    "verifiedOn": "2026-10-25",
+    "verifiedOn": "2026-11-17",
     "defaultCurrency": "USD",
     "geoEndpoint": [
       "https://ipapi.co/json/",
@@ -45,8 +45,8 @@
       "audience": "Nunca usaste Photoshop o querés una base más sólida.",
       "description": "Entendé las herramientas y empezá a componer con criterio, desde tu primer archivo hasta tu portfolio.",
       "prices": {
-        "ARS": 31050,
-        "USD": 31
+        "ARS": 29900,
+        "USD": 29.9
       },
       "url": "https://ignaciotorchi.com/curso/adobe-photoshop-desde-0",
       "reviewsUrl": "https://ignaciotorchi.com/curso/adobe-photoshop-desde-0/opiniones",
@@ -62,7 +62,12 @@
       "cta": "Elegir Photoshop",
       "sampleLabel": "Ver clases gratuitas de Photoshop",
       "cover": "assets/cover-photoshop.jpg",
-      "coverSource": "https://d3ekkp2oigezer.cloudfront.net/business/52617/products/pbqyaw_685f1452bc5d2_medium.jpg"
+      "coverSource": "https://d3ekkp2oigezer.cloudfront.net/business/52617/products/pbqyaw_685f1452bc5d2_medium.jpg",
+      "originalPrices": {
+        "ARS": 69000,
+        "USD": 69
+      },
+      "offerVerifiedOn": "2026-11-17"
     },
     {
       "id": "combo",
@@ -71,8 +76,8 @@
       "audience": "Querés empezar desde cero y especializarte en deporte.",
       "description": "Primero dominá la herramienta. Después aplicala al universo del diseño deportivo. Ambos cursos en un mismo combo.",
       "prices": {
-        "ARS": 55300,
-        "USD": 55.3
+        "ARS": 48900,
+        "USD": 48.9
       },
       "url": "https://ignaciotorchi.com/p/combo-photoshop-desde-0-flyers-deportivos-profesionales",
       "imageAlt": "Portada oficial de Photoshop + Flyers Deportivos en Ignacio Torchi",
@@ -86,7 +91,12 @@
       "access": "2 cursos · Un recorrido progresivo",
       "cta": "Elegir el combo",
       "cover": "assets/cover-combo.png",
-      "coverSource": "https://d3ekkp2oigezer.cloudfront.net/business/52617/products/gwQGAn_69608cc29cd38_medium.png"
+      "coverSource": "https://d3ekkp2oigezer.cloudfront.net/business/52617/products/gwQGAn_69608cc29cd38_medium.png",
+      "originalPrices": {
+        "ARS": 158000,
+        "USD": 158
+      },
+      "offerVerifiedOn": "2026-11-17"
     },
     {
       "id": "flyers",
@@ -95,8 +105,8 @@
       "audience": "Ya conocés Photoshop y querés mejorar tus flyers.",
       "description": "Construí piezas con jerarquía, profundidad e identidad. Trabajá el proceso completo, del recorte al acabado.",
       "prices": {
-        "ARS": 35600,
-        "USD": 35.6
+        "ARS": 33900,
+        "USD": 33.9
       },
       "url": "https://ignaciotorchi.com/curso/curso-diseno-flyers-deportivos",
       "reviewsUrl": "https://ignaciotorchi.com/curso/curso-diseno-flyers-deportivos/opiniones",
@@ -117,7 +127,7 @@
         "ARS": 89000,
         "USD": 89
       },
-      "offerVerifiedOn": "2026-10-29"
+      "offerVerifiedOn": "2026-11-17"
     }
   ],
   "gallery": [

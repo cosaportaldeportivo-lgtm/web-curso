@@ -74,6 +74,8 @@ function renderCurrency() {
   document.querySelectorAll('[data-currency]').forEach(s=>s.value=manualCurrency || 'AUTO');
   document.querySelectorAll('[data-price]').forEach(el=>el.textContent=formatPrice(courseById(el.dataset.price).prices[currency],currency));
   document.querySelectorAll('[data-original-price]').forEach(el=>el.textContent=formatPrice(courseById(el.dataset.originalPrice).originalPrices[currency],currency));
+  document.querySelectorAll('[data-discount]').forEach(el=>{const c=courseById(el.dataset.discount);el.textContent=Math.round((1-c.prices[currency]/c.originalPrices[currency])*100)+'% OFF';});
+  document.querySelectorAll('[data-saving]').forEach(el=>el.textContent=formatPrice(courseById('photoshop').prices[currency]+courseById('flyers').prices[currency]-courseById('combo').prices[currency],currency));
   document.querySelectorAll('.price-currency').forEach(el=>el.textContent=currency);
   document.querySelectorAll('[data-payment]').forEach(el=>el.textContent=config.commerce.payments[currency]);
   document.getElementById('currency-status').textContent=manualCurrency ? 'Moneda elegida manualmente. Elegí Automático para usar tu país.' : detectionState==='pending' ? 'Detectando tu país por IP…' : detectedCountry ? `Moneda automática según tu país: ${currency}.` : 'No pudimos detectar tu país. Podés elegir ARS o USD.';
