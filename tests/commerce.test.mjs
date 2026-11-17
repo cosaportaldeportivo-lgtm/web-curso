@@ -12,10 +12,10 @@ test('manual preference wins over country and unavailable detection',()=>{
  assert.equal(resolveCurrency({manual:'EUR',country:'AR'}),'ARS');
 });
 test('separate Tiendup amounts, no invented currency conversion',()=>{
- assert.equal(formatPrice(config.courses[0].prices.USD,'USD'),'US$ 31,00');
- assert.equal(formatPrice(config.courses[0].prices.ARS,'ARS'),'AR$ 31.050');
- assert.equal(formatPrice(config.courses[1].prices.USD,'USD'),'US$ 55,30');
- assert.equal(formatPrice(config.courses[2].prices.USD,'USD'),'US$ 35,60');
+ assert.equal(formatPrice(config.courses[0].prices.USD,'USD'),'US$ 29,90');
+ assert.equal(formatPrice(config.courses[0].prices.ARS,'ARS'),'AR$ 29.900');
+ assert.equal(formatPrice(config.courses[1].prices.USD,'USD'),'US$ 48,90');
+ assert.equal(formatPrice(config.courses[2].prices.USD,'USD'),'US$ 33,90');
  assert.throws(()=>formatPrice(NaN,'USD'));
 });
 test('UTMs survive the commercial link without inventing checkout or currency params',()=>{
